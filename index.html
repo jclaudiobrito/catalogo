@@ -138,30 +138,50 @@
         background: #666;
     }
 
-    /* Barra de miniaturas */
-    #thumbnail-bar {
-        position: fixed;
-        bottom: 80px;
-        left: 10px;
-        right: 10px;
-        background: rgba(0,0,0,0.85);
-        padding: 8px;
-        border-radius: 8px;
-        display: none;
-        overflow-x: auto;
-        white-space: nowrap;
-        z-index: 1000;
-    }
-    #thumbnail-bar img {
-        height: 100px;
-        margin: 0 5px;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: border 0.2s;
-    }
-    #thumbnail-bar img:hover {
-        border: 2px solid #fff;
-    }
+/* Barra de miniaturas */
+#thumbnail-bar {
+    position: fixed;
+    bottom: 80px;
+    left: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.85);
+    padding: 8px;
+    border-radius: 8px;
+    display: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    z-index: 1000;
+    scroll-behavior: smooth; /* rolagem suave */
+}
+
+/* Miniatura com número */
+.thumbnail-item {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+}
+.thumbnail-item img {
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: border 0.2s;
+}
+.thumbnail-item img:hover {
+    border: 2px solid #fff;
+}
+.thumbnail-item span {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+}
+
     </style>
 </head>
 <body>
@@ -254,18 +274,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateCounter(1);
 
-    // Gera miniaturas
-    var bar = document.getElementById("thumbnail-bar");
-    for (let i = 1; i <= totalPages; i++) {
-        let img = document.createElement("img");
-        img.src = flipbookcfg.url + i + "-thumb.jpg";
-        img.alt = "Página " + i;
-        img.addEventListener("click", function() {
-            $(".magazine").turn("page", i);
-            bar.style.display = "none"; // fecha ao clicar
-        });
-        bar.appendChild(img);
-    }
+// Gera miniaturas com número da página
+var bar = document.getElementById("thumbnail-bar");
+for (let i = 1; i <= totalPages; i++) {
+    let container = document.createElement("div");
+    container.classList.add("thumbnail-item");
+
+    let img = document.createElement("img");
+    img.src = flipbookcfg.url + i + "-thumb.jpg";
+    img.alt = "Página " + i;
+    img.addEventListener("click", function() {
+        $(".magazine").turn("page", i);
+        bar.style.display = "none"; // fecha ao clicar
+    });
+
+    let label = document.createElement("span");
+    label.textContent = i;
+
+    container.appendChild(img);
+    container.appendChild(label);
+    bar.appendChild(container);
+}
+
 
     // Alterna exibição da barra
     document.getElementById("thumb-toggle").addEventListener("click", function() {
