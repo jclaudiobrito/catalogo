@@ -3,209 +3,275 @@
 <head>
     <title>Catálogo</title>
     <meta charset="UTF-8">
-     <link rel="icon" href="flipbook/pics/favicon.ico" type="image/x-icon">
-     <meta name="description" content="Pulseiras & Colares de Pedras Naturais. ">
-     <meta name="robots" content="noindex, nofollow">
-  <!--  <meta name="viewport" content="width = 1050, user-scalable = no" /> -->
+    <link rel="icon" href="flipbook/pics/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Pulseiras & Colares de Pedras Naturais.">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:image" content="data:1-thumb.jpg">
     <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,700|Ubuntu:400,700|Great+Vibes' rel='stylesheet' type='text/css'>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script type="text/javascript" src="flipbook/extras/jquery.min.1.7.js"></script>
     <script type="text/javascript" src="flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
     <script type="text/javascript" src="flipbook/extras/modernizr.2.5.3.min.js"></script>
     <script type="text/javascript" src="flipbook/lib/hash.js"></script>
-        <script type="text/javascript">
-        var flipbookcfg={
-            url: ".\/data\/",
+
+    <script type="text/javascript">
+        var flipbookcfg = {
+            url: "./data/",
             cover: 0,
             numPages: 13,
             textTip: "Press ESC to exit. Use the keyboard arrows to change the page.",
-            background: ".\/flipbook\/files\/backgrounds\/back4.png",
+            background: "./flipbook/files/backgrounds/back4.png",
             showSlider: "0",
             showSocial: "null",
             showformat: "5",
-          /* companyLogo: "https:\/\/www.flipbookpdf.net\/web\/site\/img\/logonet.png", */
             title: "",
-            tagtitle: "Catalogo", 
-            description: "", 
+            tagtitle: "Catalogo",
+            description: "",
             showDownload: "0",
-           /* backlink: "https:\/\/www.flipbookpdf.net", */
             opacity: "0.5",
             name: "208ec5c457fe91fb229044e9f3c2d54d1a7fa3a3202508.pdf",
-            direction: "ltr", 
-            flipsound: "null", 
+            direction: "ltr",
+            flipsound: "null",
             widthimg: "1489",
-            heightimg: "2106" 
-            
+            heightimg: "2106"
         };
     </script>
+
     <style>
- body {
+    body {
         overflow-y: scroll;
     }
-    ::-webkit-scrollbar {
-        width: 8px; 
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background-color: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background-color: #888; }
+    ::-webkit-scrollbar-thumb:hover { background-color: #555; }
+
+    .logo-backs { opacity: 0.5; }
+    .form-element1 input[type=text], .form-element1 select, .form-element1 textarea {
+        border: 1px solid gray;
+        padding: 5px;
+        min-width: 74px;
+        resize: vertical;
     }
-    ::-webkit-scrollbar-track {
-        background-color: #f1f1f1; 
+    .form-element1 {
+        margin-top: 10px;
+        margin-bottom: 12px;
+        margin-left: 65px;
     }
-    ::-webkit-scrollbar-thumb {
-        background-color: #888;
+    @media only screen and (max-width: 750px) {
+        .flipbook-title { display:none!important; }
+        .zoom-icon { display:none; }
+        .controls-pdf { right: 20px!important; }
     }
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
-    }    
-         
-    
-    .logo-backs {
-    opacity: 0.5;
-}
-.form-element1 input[type=text], .form-element1 select, .form-element1 textarea {
-border: 1px solid gray;
-padding: 5px;
-min-width: 74px;
-resize: vertical;
-}
+    #ads {
+        z-index:100;
+        position: fixed;
+        bottom:14px;
+        text-align: center;
+        padding: 2px;
+        width: 100%;
+    }
 
-.form-element1 {
-margin-top: 10px;
-margin-bottom: 12px;
-margin-left: 65px;
-}
+    /* Botão WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 35px;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease-in-out;
+    }
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        background-color: #20ba5a;
+    }
+    @media screen and (min-width: 769px) {
+        .whatsapp-float { display: none; }
+    }
 
-@media only screen and (max-width: 750px) {
-.flipbook-title {
-    display:none!important;
-  }
-.zoom-icon {
-    display:none;
-  }
+    /* Contador de páginas */
+    #page-counter {
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        background: #444;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+    }
 
-.controls-pdf {
-    right: 20px!important;
-}  
-    
-  
-}
+    /* Botão miniaturas */
+    #thumb-toggle {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: #444;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 22px;
+        cursor: pointer;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+    #thumb-toggle:hover {
+        background: #666;
+    }
 
-#ads {
-z-index:100; 
-position: fixed; 
-bottom:14px; 
-text-align: center; 
-padding: 2px; 
-width: 100%;
-}
-
-</style>
-    
+    /* Barra de miniaturas */
+    #thumbnail-bar {
+        position: fixed;
+        bottom: 80px;
+        left: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.85);
+        padding: 8px;
+        border-radius: 8px;
+        display: none;
+        overflow-x: auto;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+    #thumbnail-bar img {
+        height: 100px;
+        margin: 0 5px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border 0.2s;
+    }
+    #thumbnail-bar img:hover {
+        border: 2px solid #fff;
+    }
+    </style>
 </head>
 <body>
- 
 
 <div class="logo-backs"></div>
-
 <audio id="audio" src="flipbook/pics/page-flip.mp3"></audio>
 
+<!-- Contador -->
+<div id="page-counter">Página 1 de 13</div>
 
-    <div class="flipbook-title" style="display: none;">
-        <h1></h1>
-        <h2></h2>
-        <p></p>
-    </div>
-
-    
-    <div id="canvas">
-
-        <!--<div class="close-icon">
-            <img src="flipbook/pics/close.png" style="cursor: pointer;" />
-        </div>
-        -->
-
-        <div class="controls-pdf">
+<div id="canvas">
+    <div class="controls-pdf">
         <div class="controlzoom" style="display:none">
-        <a href="#" id="zoomin" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="flipbook/pics/zoomin.png" /></a>
-         <a href="#" id="zoomout" style="font-size:16px; color:#808080; text-decoration: none; font-weight:bold"><img src="flipbook/pics/zoomout.png" /></a>
-</div>
-                              
-            <a href="./PDF/208ec5c457fe91fb229044e9f3c2d54d1a7fa3a3202508.pdf" target="_blank" ><img style="display:none;" src="flipbook/pics/down-pdf.png" /></a>
-            <div class="zoom-icon zoom-icon-in"></div>
-            <input type="image" class="fs" src="flipbook/pics/fs.png" onclick="openFullscreen();"/>
-             <a href="#" id="prev"></a>
-            <a href="#" id="next"></a>
+            <a href="#" id="zoomin"><img src="flipbook/pics/zoomin.png" /></a>
+            <a href="#" id="zoomout"><img src="flipbook/pics/zoomout.png" /></a>
         </div>
-
-        <div class="magazine-viewport" id="flipfull">
-         
-        
-            <div class="container">
-                <div class="magazine">
-                    
-                    <div ignore="1" class="next-button"></div>
-                    <div ignore="1" class="previous-button"></div>
-                </div>
+        <a href="./PDF/208ec5c457fe91fb229044e9f3c2d54d1a7fa3a3202508.pdf" target="_blank"><img style="display:none;" src="flipbook/pics/down-pdf.png" /></a>
+        <div class="zoom-icon zoom-icon-in"></div>
+        <input type="image" class="fs" src="flipbook/pics/fs.png" onclick="openFullscreen();"/>
+        <a href="#" id="prev"></a>
+        <a href="#" id="next"></a>
+    </div>
+    <div class="magazine-viewport" id="flipfull">
+        <div class="container">
+            <div class="magazine">
+                <div ignore="1" class="next-button"></div>
+                <div ignore="1" class="previous-button"></div>
             </div>
-            <div class="bottom">
-                <div id="slider-bar" class="turnjs-slider">
-                        <div id="slider"></div>
-                </div>
+        </div>
+        <div class="bottom">
+            <div id="slider-bar" class="turnjs-slider">
+                <div id="slider"></div>
             </div>
         </div>
     </div>
+</div>
 
-
-    <script type="text/javascript" src="flipbook/js/core_single.js"></script>
-    <script type="text/javascript">
-        yepnope({
-            test: Modernizr.csstransforms,
-            yep: ['flipbook/lib/turn.min.js'],
-            nope: ['flipbook/lib/turn.html4.min.js', 'flipbook/css/jquery.ui.html4.css'],
-            both: ['flipbook/lib/zoom.min.js', 'flipbook/css/jquery.ui.css', 'flipbook/js/magazineSINGLEoff.js', 'flipbook/css/magazine_single.css'],
-            complete: loadApp
-        });
-    </script>    
-  
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144220429-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-144220429-1');
-</script>    
-    
-<!-- AddToAny BEGIN -->
-
-<a class="a2a_dd" href="https://wa.me/5511951300490?text=Olá! Gostaria de saber mais sobre suas pulseiras."title="Fale conosco no WhatsApp!">
-    <img src="flipbook/pics/wa.ico" width="36" height="34" border="0" alt="Pedidos" style="position: absolute;bottom:27px;right:12px;z-index: 110;"></a>
-
-<script>
-var a2a_config = a2a_config || {};
-a2a_config.onclick = 1;
+<script type="text/javascript" src="flipbook/js/core_single.js"></script>
+<script type="text/javascript">
+    yepnope({
+        test: Modernizr.csstransforms,
+        yep: ['flipbook/lib/turn.min.js'],
+        nope: ['flipbook/lib/turn.html4.min.js', 'flipbook/css/jquery.ui.html4.css'],
+        both: ['flipbook/lib/zoom.min.js', 'flipbook/css/jquery.ui.css', 'flipbook/js/magazineSINGLEoff.js', 'flipbook/css/magazine_single.css'],
+        complete: loadApp
+    });
 </script>
-<script defer async src=""></script>
-<!-- AddToAny END -->
-        
-       <script>
+
+<!-- Botão WhatsApp -->
+<a href="https://wa.me/5511951300490?text=Olá! Gostaria de saber mais sobre suas pulseiras."
+   class="whatsapp-float"
+   title="Fale conosco no WhatsApp!">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Botão e barra de miniaturas -->
+<button id="thumb-toggle" title="Miniaturas">
+    <i class="fas fa-th"></i>
+</button>
+<div id="thumbnail-bar"></div>
+
+<script>
 var elem = document.getElementById("flipfull");
 function openFullscreen() {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) { /* Firefox */
+  } else if (elem.mozRequestFullScreen) {
     elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+  } else if (elem.webkitRequestFullscreen) {
     elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+  } else if (elem.msRequestFullscreen) {
     elem.msRequestFullscreen();
   } else if (elem.webkitEnterFullscreen) {
-       elem.webkitEnterFullscreen(); //for iphone this code worked
+       elem.webkitEnterFullscreen();
   }
 }
+
+// Atualiza contador
+document.addEventListener("DOMContentLoaded", function() {
+    var totalPages = flipbookcfg.numPages;
+    var pageCounter = document.getElementById("page-counter");
+
+    function updateCounter(page) {
+        pageCounter.textContent = "Página " + page + " de " + totalPages;
+    }
+
+    $(document).on("turned", ".magazine", function(event, page) {
+        updateCounter(page);
+    });
+
+    updateCounter(1);
+
+    // Gera miniaturas
+    var bar = document.getElementById("thumbnail-bar");
+    for (let i = 1; i <= totalPages; i++) {
+        let img = document.createElement("img");
+        img.src = flipbookcfg.url + i + "-thumb.jpg";
+        img.alt = "Página " + i;
+        img.addEventListener("click", function() {
+            $(".magazine").turn("page", i);
+            bar.style.display = "none"; // fecha ao clicar
+        });
+        bar.appendChild(img);
+    }
+
+    // Alterna exibição da barra
+    document.getElementById("thumb-toggle").addEventListener("click", function() {
+        bar.style.display = (bar.style.display === "none" || bar.style.display === "") ? "block" : "none";
+    });
+});
 </script>
-   
 </body>
 </html>
