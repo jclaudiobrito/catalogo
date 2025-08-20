@@ -3,205 +3,68 @@
 <head>
     <title>Catálogo</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="flipbook/pics/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="application/imagens/favicon.ico" type="image/x-icon">
     <meta name="description" content="Pulseiras & Colares de Pedras Naturais.">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:image" content="data:1-thumb.jpg">
-    <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,700|Ubuntu:400,700|Great+Vibes' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="application/css/style.css">
+   
+    <script src="application/js/jquery.min.1.7.js"></script>
+    <script src="application/js/jquery-ui-1.8.20.full.min.js"></script>
+    <script src="application/js/modernizr.2.5.3.min.js"></script>
+    <script src="application/js/hash.js"></script>
+    <script src="application/js/page.js" ></script>
+    <link rel="stylesheet" type="text/css" href="application/css/fronte.css">
 
-    <script type="text/javascript" src="flipbook/extras/jquery.min.1.7.js"></script>
-    <script type="text/javascript" src="flipbook/extras/jquery-ui-1.8.20.full.min.js"></script>
-    <script type="text/javascript" src="flipbook/extras/modernizr.2.5.3.min.js"></script>
-    <script type="text/javascript" src="flipbook/lib/hash.js"></script>
 
-    <script type="text/javascript">
-        var flipbookcfg = {
-            url: "./data/",
-            cover: 0,
-            numPages: 13,
-            textTip: "Press ESC to exit. Use the keyboard arrows to change the page.",
-            background: "./flipbook/files/backgrounds/back4.png",
-            showSlider: "0",
-            showSocial: "null",
-            showformat: "5",
-            title: "",
-            tagtitle: "Catalogo",
-            description: "",
-            showDownload: "0",
-            opacity: "0.5",
-            name: "208ec5c457fe91fb229044e9f3c2d54d1a7fa3a3202508.pdf",
-            direction: "ltr",
-            flipsound: "null",
-            widthimg: "1489",
-            heightimg: "2106"
-        };
-    </script>
 
-    <style>
-    body {
-        overflow-y: scroll;
-    }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background-color: #f1f1f1; }
-    ::-webkit-scrollbar-thumb { background-color: #888; }
-    ::-webkit-scrollbar-thumb:hover { background-color: #555; }
+<!-- Botão de abrir menu -->
+ <button id="menuToggle" class="menu-toggle"><i class="fa fa-bars" ></i>&ensp;Produtos</button>
 
-    .logo-backs { opacity: 0.5; }
-    .form-element1 input[type=text], .form-element1 select, .form-element1 textarea {
-        border: 1px solid gray;
-        padding: 5px;
-        min-width: 74px;
-        resize: vertical;
-    }
-    .form-element1 {
-        margin-top: 10px;
-        margin-bottom: 12px;
-        margin-left: 65px;
-    }
-    @media only screen and (max-width: 750px) {
-        .flipbook-title { display:none!important; }
-        .zoom-icon { display:none; }
-        .controls-pdf { right: 20px!important; }
-    }
-    #ads {
-        z-index:100;
-        position: fixed;
-        bottom:14px;
-        text-align: center;
-        padding: 2px;
-        width: 100%;
-    }
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
 
-    /* Botão WhatsApp */
-    .whatsapp-float {
-        position: fixed;
-        width: 60px;
-        height: 60px;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25d366;
-        color: white;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 35px;
-        box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-        z-index: 999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.2s ease-in-out;
-    }
-    .whatsapp-float:hover {
-        transform: scale(1.1);
-        background-color: #20ba5a;
-    }
-    @media screen and (min-width: 769px) {
-        .whatsapp-float { display: none; }
-    }
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <!-- Botão recolher dentro da sidebar -->
+    <button id="sidebarClose" class="sidebar-close-btn" title="Fechar"><i class="fa fa-reply"></i>&ensp;Voltar</button>
 
-    /* Contador de páginas */
-    #page-counter {
-        position: fixed;
-        top: 15px;
-        left: 20px;
-        background: rgba(0,0,0,0.7);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 14px;
-        z-index: 1000;
-        font-family: Arial, sans-serif;
-    }
-
-    /* Botão miniaturas */
-    #thumb-toggle {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-        background: #444;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        font-size: 22px;
-        cursor: pointer;
-        z-index: 1001;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-    }
-    #thumb-toggle:hover {
-        background: #666;
-    }
-
-    /* Barra de miniaturas */
-#thumbnail-bar {
-    position: fixed;
-    bottom: 80px;
-    left: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.85);
-    padding: 8px;
-    border-radius: 8px;
-    display: none;
-    overflow-x: auto;
-    white-space: nowrap;
-    z-index: 1000;
-    scroll-behavior: smooth; /* rolagem suave */
-}
-
-/* Miniatura com número */
-.thumbnail-item {
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
-}
-.thumbnail-item img {
-    height: 100px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    transition: border 0.2s;
-}
-.thumbnail-item img:hover {
-    border: 2px solid #fff;
-}
-.thumbnail-item span {
-    position: absolute;
-    top: 4px;
-    left: 6px;
-    background: rgba(0,0,0,0.75);
-    color: white;
-    font-size: 16px; /* maior! style para mostrar numero de pagina na miniatura */
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-}
-
-    </style>
-</head>
-<body>
+    <ul>
+        <li class="menu-item"> 
+           <img src="application/imagens/puls.png">&emsp;Pulseira &emsp;&emsp;&ensp;<span aria-hidden="true" class="fa fa-chevron-down"></span>
+            <ul class="submenu">
+                <li data-page="3"><img src="application/imagens/man.png">&emsp;Homem</li>
+                <li data-page="10"><img src="application/imagens/female.png">&emsp;Mulher</li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <img src="application/imagens/colar.png">&emsp;Colar &emsp;&emsp;&emsp;&ensp;<span aria-hidden="true" class="fa fa-chevron-down"></span>
+            <ul class="submenu">
+                <li data-page="2"><img src="application/imagens/man.png">&emsp;Homem</li>
+                <li data-page="16"><img src="application/imagens/female.png">&emsp;Mulher</li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <img src="application/imagens/cart.png"></span>&emsp;Carteira &emsp;&emsp;&ensp;<span aria-hidden="true" class="fa fa-chevron-down"></span>
+            <ul class="submenu">
+                <li data-page="9"><img src="application/imagens/man.png">&emsp;Homem</li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
 <div class="logo-backs"></div>
-<audio id="audio" src="flipbook/pics/page-flip.mp3"></audio>
-
-<!-- Contador -->
-<div id="page-counter">Página 1 de 13</div>
+<audio id="audio" src="application/song/page-flip.mp3"></audio>
 
 <div id="canvas">
     <div class="controls-pdf">
         <div class="controlzoom" style="display:none">
-            <a href="#" id="zoomin"><img src="flipbook/pics/zoomin.png" /></a>
-            <a href="#" id="zoomout"><img src="flipbook/pics/zoomout.png" /></a>
+            <a href="#" id="zoomin"><img src="application/imagens/zoomin.png" /></a>
+            <a href="#" id="zoomout"><img src="application/imagens/zoomout.png" /></a>
         </div>
-        <a href="./PDF/208ec5c457fe91fb229044e9f3c2d54d1a7fa3a3202508.pdf" target="_blank"><img style="display:none;" src="flipbook/pics/down-pdf.png" /></a>
         <div class="zoom-icon zoom-icon-in"></div>
-        <input type="image" class="fs" src="flipbook/pics/fs.png" onclick="openFullscreen();"/>
+        <input type="image" class="fs" src="application/imagens/fs.png" onclick="openFullscreen();"/>
         <a href="#" id="prev"></a>
         <a href="#" id="next"></a>
     </div>
@@ -212,96 +75,172 @@
                 <div ignore="1" class="previous-button"></div>
             </div>
         </div>
-        <div class="bottom">
-            <div id="slider-bar" class="turnjs-slider">
-                <div id="slider"></div>
-            </div>
-        </div>
     </div>
 </div>
 
-<script type="text/javascript" src="flipbook/js/core_single.js"></script>
-<script type="text/javascript">
+<!-- Barra fixa inferior -->
+<div id="flipbar">
+    <button id="thumb-toggle" title="Mostrar/ocultar miniaturas"> <i class="fa-solid fa-book-open" style=" color: #FFF8DC;"></i></button>
+    <div class="flipbar__thumbs"></div> 
+    <a class="flipbar__wa" href="https://wa.me/5511951300490" title="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span>Pedidos</span>
+    </a>
+</div>
+
+<script src="application/js/core_single.js"></script>
+<script>
     yepnope({
         test: Modernizr.csstransforms,
-        yep: ['flipbook/lib/turn.min.js'],
-        nope: ['flipbook/lib/turn.html4.min.js', 'flipbook/css/jquery.ui.html4.css'],
-        both: ['flipbook/lib/zoom.min.js', 'flipbook/css/jquery.ui.css', 'flipbook/js/magazineSINGLEoff.js', 'flipbook/css/magazine_single.css'],
+        yep: ['application/js/turn.min.js'],
+        nope: ['application/js/turn.html4.min.js', 'application/css/jquery.ui.html4.css'],
+        both: ['application/js/zoom.min.js', 'application/css/jquery.ui.css', 'application/js/magazineSINGLEoff.js', 'application/css/magazine_single.css'],
         complete: loadApp
     });
+
+    const thumbsContainer = document.querySelector(".flipbar__thumbs");
+    const toggleBtn = document.getElementById("thumb-toggle");
+
+    toggleBtn.addEventListener("click", function(){
+        thumbsContainer.classList.toggle("active");
+
+        if (thumbsContainer.classList.contains("active")) {
+            const thumbs = thumbsContainer.querySelectorAll(".flipbar__thumb");
+            thumbs.forEach((thumb, index) => {
+                thumb.style.transitionDelay = (index * 0.08) + "s";
+            });
+        } else {
+            const thumbs = thumbsContainer.querySelectorAll(".flipbar__thumb");
+            thumbs.forEach((thumb) => {
+                thumb.style.transitionDelay = "0s";
+            });
+        }
+    });
+
+    // Drag-to-scroll com mouse
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    thumbsContainer.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX - thumbsContainer.offsetLeft;
+        scrollLeft = thumbsContainer.scrollLeft;
+    });
+    thumbsContainer.addEventListener("mouseleave", () => isDown = false);
+    thumbsContainer.addEventListener("mouseup", () => isDown = false);
+    thumbsContainer.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - thumbsContainer.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        thumbsContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Drag-to-scroll no touch
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+
+    thumbsContainer.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = thumbsContainer.scrollLeft;
+    });
+    thumbsContainer.addEventListener("touchmove", (e) => {
+        const touchX = e.touches[0].pageX;
+        const move = (touchX - touchStartX) * 1.5;
+        thumbsContainer.scrollLeft = touchScrollLeft - move;
+    });
+
+    if (thumbsContainer.classList.contains("active")) {
+    const thumbs = thumbsContainer.querySelectorAll(".flipbar__thumb");
+    thumbs.forEach((thumb, index) => {
+        thumb.style.animationDelay = (index * 0.08) + "s";
+    });
+} else {
+    const thumbs = thumbsContainer.querySelectorAll(".flipbar__thumb");
+    thumbs.forEach((thumb) => {
+        thumb.style.animationDelay = "0s";
+    });
+}
+
+/* ===== Atualiza destaque da miniatura ao mudar página ===== */
+function updateActiveThumbnail(page) {
+    document.querySelectorAll(".flipbar__thumb").forEach(thumb => {
+        thumb.classList.remove("active-thumb");
+    });
+    const activeThumb = document.querySelector(`.flipbar__thumb[data-page="${page}"]`);
+    if (activeThumb) activeThumb.classList.add("active-thumb");
+}
+
+/* Ao criar as miniaturas já coloco data-page */
+for (let i = 1; i <= flipbookcfg.numPages; i++) {
+    let btn = document.createElement("button");
+    btn.className = "flipbar__thumb " + (i % 2 === 0 ? "from-left" : "from-right");
+    btn.setAttribute("data-page", i);
+    btn.innerHTML = `
+        <img src="${flipbookcfg.url}${i}-thumb.jpg" alt="Página ${i}">
+        <span>${i}</span>
+    `;
+    btn.addEventListener("click", function () {
+        $(".magazine").turn("page", i);
+        thumbsContainer.classList.remove("active");
+    });
+    thumbsContainer.appendChild(btn);
+}
+
+/* Detecta mudança de página no flipbook */
+$(".magazine").bind("turned", function (e, page) {
+    updateActiveThumbnail(page);
+});
+
+        document.querySelectorAll(".menu-item").forEach(item => {
+            item.addEventListener("click", () => item.classList.toggle("open"));
+        });
+
+        document.querySelectorAll(".submenu li").forEach(sub => {
+            sub.addEventListener("click", e => {
+                const page = e.target.getAttribute("data-page");
+                if (page) $(".magazine").turn("page", parseInt(page));
+                sidebar.classList.remove("open");
+                overlay.style.display = "none";
+                e.stopPropagation();
+            });
+        });
+
+/* Sidebar toggle */
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const menuToggle = document.getElementById("menuToggle");
+const sidebarClose = document.getElementById("sidebarClose");
+
+menuToggle.addEventListener("click", () => {
+    sidebar.classList.add("open");
+    overlay.style.display = "block";
+});
+
+overlay.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    overlay.style.display = "none";
+});
+
+/* Botão de fechar dentro da sidebar */
+sidebarClose.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    overlay.style.display = "none";
+});
+
 </script>
-
-<!-- Botão WhatsApp -->
-<a href="https://wa.me/5511951300490?text=Olá! Gostaria de saber mais sobre suas pulseiras."
-   class="whatsapp-float"
-   title="Fale conosco no WhatsApp!">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Botão e barra de miniaturas -->
-<button id="thumb-toggle" title="Miniaturas">
-    <i class="fas fa-th"></i>
-</button>
-<div id="thumbnail-bar"></div>
-
 <script>
+/* ========= fullscreen ========= */
 var elem = document.getElementById("flipfull");
 function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
-  } else if (elem.webkitEnterFullscreen) {
-       elem.webkitEnterFullscreen();
-  }
+  if (elem.requestFullscreen) elem.requestFullscreen();
+  else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+  else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+  else if (elem.webkitEnterFullscreen) elem.webkitEnterFullscreen();
 }
-
-// Atualiza contador
-document.addEventListener("DOMContentLoaded", function() {
-    var totalPages = flipbookcfg.numPages;
-    var pageCounter = document.getElementById("page-counter");
-
-    function updateCounter(page) {
-        pageCounter.textContent = "Página " + page + " de " + totalPages;
-    }
-
-    $(document).on("turned", ".magazine", function(event, page) {
-        updateCounter(page);
-    });
-
-    updateCounter(1);
-
-// Gera miniaturas com número da página
-var bar = document.getElementById("thumbnail-bar");
-for (let i = 1; i <= totalPages; i++) {
-    let container = document.createElement("div");
-    container.classList.add("thumbnail-item");
-
-    let img = document.createElement("img");
-    img.src = flipbookcfg.url + i + "-thumb.jpg";
-    img.alt = "Página " + i;
-    img.addEventListener("click", function() {
-        $(".magazine").turn("page", i);
-        bar.style.display = "none"; // fecha ao clicar
-    });
-
-    let label = document.createElement("span");
-    label.textContent = i;
-
-    container.appendChild(img);
-    container.appendChild(label);
-    bar.appendChild(container);
-}
-
-    // Alterna exibição da barra
-    document.getElementById("thumb-toggle").addEventListener("click", function() {
-        bar.style.display = (bar.style.display === "none" || bar.style.display === "") ? "block" : "none";
-    });
-});
 </script>
+
 </body>
 </html>

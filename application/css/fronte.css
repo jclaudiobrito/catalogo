@@ -1,0 +1,283 @@
+/* Barra fixa inferior */
+    #flipbar {
+        position: fixed;
+        bottom: 29px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(0,0,0,0.5);
+        padding: 8px 12px;
+        border-radius: 10px;
+        z-index: 9999;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    #thumb-toggle {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 27px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: transform 0.2s;
+    }
+    #thumb-toggle:hover {
+        transform: scale(1.2);
+    }
+
+    /* Miniaturas - container */
+    .flipbar__thumbs {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        position: fixed;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%) translateY(15px) scale(0.95);
+        background: rgba(0,0,0,0.6);
+        padding: 8px;
+        border-radius: 8px;
+        max-width: 90vw;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: thin;
+        scrollbar-color: #999 transparent;
+        opacity: 0;
+        visibility: hidden;
+        transition: 
+            opacity 0.4s ease,
+            transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+            visibility 0.4s;
+        cursor: grab;
+        z-index: 10000;
+    }
+    .flipbar__thumbs:active {
+        cursor: grabbing;
+    }
+    .flipbar__thumbs::-webkit-scrollbar {
+        height: 8px;
+    }
+    .flipbar__thumbs::-webkit-scrollbar-thumb {
+        background: #666;
+        border-radius: 4px;
+    }
+    .flipbar__thumbs.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    /* Miniaturas individuais */
+    .flipbar__thumb {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .flipbar__thumb img {
+        width: 70px;
+        height: auto;
+        border: 2px solid #FFFAFA;
+        border-radius: 4px;
+        transition: transform 0.2s;
+    }
+    .flipbar__thumb img:hover {
+        transform: scale(1.1);
+    }
+    .flipbar__thumb span {
+        font-size: 14px;
+        margin-top: 2px;
+    }
+
+    /* Efeito quando ativo */
+    .flipbar__thumbs.active .flipbar__thumb {
+        opacity: 1;
+        transform: scale(1);
+    }
+    /* Direções diferentes */
+    .flipbar__thumb.from-left {
+        transform: translateX(-20px) scale(0.95);
+    }
+    .flipbar__thumb.from-right {
+        transform: translateX(20px) scale(0.95);
+    }
+    .flipbar__thumbs.active .flipbar__thumb.from-left,
+    .flipbar__thumbs.active .flipbar__thumb.from-right {
+        transform: translateX(0) scale(1);
+    }
+
+    /* Botão WhatsApp */
+    .flipbar__wa {
+        display: flex;
+        align-items: center;
+        background: #25D366;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        margin-left: 10px;
+        transition: background 0.3s;
+    }
+    .flipbar__wa:hover {
+        background: #1ebe5d;
+    }
+    .flipbar__wa i {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+    /* Bounce suave */
+@keyframes bounceInLeft {
+    0%   { transform: translateX(-25px) scale(0.95); opacity: 0; }
+    60%  { transform: translateX(0) scale(1.05); opacity: 1; }
+    80%  { transform: translateX(0) scale(0.98); }
+    100% { transform: translateX(0) scale(1); }
+}
+@keyframes bounceInRight {
+    0%   { transform: translateX(25px) scale(0.95); opacity: 0; }
+    60%  { transform: translateX(0) scale(1.05); opacity: 1; }
+    80%  { transform: translateX(0) scale(0.98); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+/* Ajuste para quando as miniaturas aparecem */
+.flipbar__thumbs.active .flipbar__thumb.from-left {
+    animation: bounceInLeft 0.6s ease forwards;
+}
+.flipbar__thumbs.active .flipbar__thumb.from-right {
+    animation: bounceInRight 0.6s ease forwards;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+}
+/* ===== Destaque da miniatura ativa com brilho ===== */
+.flipbar__thumb.active-thumb img {
+    border: 6px solid #ff9800;
+    box-shadow: 0 0 12px rgba(255, 152, 0, 0.9);
+    transform: scale(1.05);
+    animation: pulseBorder 1.5s infinite, shineBorder 2s linear infinite;
+}
+
+/* Efeito de pulsar suave */
+@keyframes pulseBorder {
+    0% { box-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
+    50% { box-shadow: 0 0 16px rgba(255, 152, 0, 1); }
+    100% { box-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
+}
+
+/* Brilho se movendo na borda */
+@keyframes shineBorder {
+    0% { border-color: #87CEEB; }
+    50% { border-color: #DC143C; }
+    100% { border-color: #00FF00; }
+}
+
+/* Botão fixo sobre o flipbook no canto superior esquerdo */
+.menu-toggle {
+    position: absolute;
+    top: 20px;
+    left: 18px;
+    z-index: 2000;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+    #menuToggle:hover {
+        background: rgba(128,128,128);
+}
+       /* Sidebar Moderna */
+        .sidebar {
+            position: fixed;
+            top: 20;
+            left: -300px;
+            width: 200px;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(6px);
+            box-shadow: 2px 0 16px rgba(0,0,0,0.7);
+            transition: left 0.6s ease;
+            z-index: 9999;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        .sidebar.open {
+            left: 0;
+
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar .menu-item {
+            padding: 18px 16spx; 
+            color: #E0FFFF;
+            text-box: left;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar .submenu {
+            display: none;
+            padding-left: 0; 
+            background: rgba(255,255,255,0.05);
+        }
+        .sidebar .menu-item.open .submenu {
+            display: block;
+        }
+        .sidebar .submenu li {
+            padding: 12px;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .sidebar .submenu li:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Overlay */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            z-index: 1400;
+        }
+
+/* Botão para recolher dentro da sidebar */
+.sidebar-close-btn {
+    position: fixed;
+    top: 20px;
+    left: 18px;   
+    border: none;
+    color: #E0FFFF;    
+    cursor: pointer;
+    z-index: 1600;
+    align-items: center;
+    background: rgba(70,130,180);
+    color: white;
+    padding: 9px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background 0.3s;
+    overflow-y: auto;
+}
+.sidebar-close-btn:hover {
+        background: grey;
+    }
